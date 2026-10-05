@@ -2,7 +2,7 @@ import { ethers } from 'hardhat'
 
 async function main() {
   const recipientAddress = '0xe11f97159e3ab34ed648bbaa03218f437533d990'
-  const amountInEth = '10000' // 10,000 ETH
+  const amountInEth = '9000' // 9,000 ETH (leaving some for gas)
 
   console.log('Funding account:', recipientAddress)
   console.log('Amount:', amountInEth, 'ETH')
