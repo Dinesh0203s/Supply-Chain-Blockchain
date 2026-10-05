@@ -1,0 +1,127 @@
+================================================================================
+  SUPPLY CHAIN BLOCKCHAIN - TROUBLESHOOTING CHECKLIST
+================================================================================
+
+ERROR: "Network or wallet connection issue. Check your wallet and RPC"
+
+This means MetaMask is NOT properly connected. Follow this checklist:
+
+================================================================================
+STEP 1: CHECK METAMASK INSTALLATION
+================================================================================
+[ ] MetaMask icon visible in browser toolbar?
+    NO  → Install from https://metamask.io/download/
+    YES → Continue to Step 2
+
+================================================================================
+STEP 2: OPEN YOUR BROWSER & GO TO THE APP
+================================================================================
+[ ] Open http://localhost:3001 in your browser
+[ ] Look at BOTTOM-RIGHT corner - do you see a "Connection Diagnostic" box?
+    NO  → Refresh the page (Ctrl+R or Cmd+R)
+    YES → Continue to Step 3
+
+================================================================================
+STEP 3: FIX ISSUES SHOWN IN DIAGNOSTIC BOX
+================================================================================
+The diagnostic box shows exactly what's wrong. Fix in this order:
+
+[ ] "MetaMask Installed" shows ✓ (green checkmark)
+    If ✗ → Install MetaMask extension
+
+[ ] "MetaMask Connected" shows ✓
+    If ✗ → Click the "Connect" button in the diagnostic box
+          OR click MetaMask icon and manually connect
+
+[ ] "Correct Network (1337)" shows ✓
+    If ✗ → Click the "Switch" button in the diagnostic box
+          OR add network manually:
+          - Open MetaMask
+          - Click network dropdown
+          - Add Network → Add network manually
+          - Enter:
+            Network Name: Hardhat Local
+            RPC URL:      http://127.0.0.1:8545
+            Chain ID:     1337
+            Symbol:       ETH
+          - Save and switch to this network
+
+[ ] "RPC Connection" shows ✓
+    If ✗ → Backend is not running! 
+          Open terminal and run:
+          cd backend
+          npm run node
+
+[ ] "Contract Deployed" shows ✓
+    If ✗ → Contract not deployed. Open new terminal:
+          cd backend
+          npm run deploy:local
+
+================================================================================
+STEP 4: VERIFY SUCCESS
+================================================================================
+[ ] All items in diagnostic box show ✓ (green checkmarks)
+[ ] You see message "🎉 All systems ready!"
+[ ] The app shows data (not just loading spinners)
+[ ] No red error messages
+
+================================================================================
+STILL HAVING ISSUES? DO A FULL RESET:
+================================================================================
+
+1. CLOSE everything
+   [ ] Close all browser tabs with localhost:3001
+   [ ] Stop all terminal processes (Ctrl+C)
+
+2. RESTART Backend
+   [ ] Open terminal 1:
+       cd backend
+       npm run node
+   [ ] Wait for: "Started HTTP and WebSocket JSON-RPC server"
+
+3. REDEPLOY Contract  
+   [ ] Open terminal 2:
+       cd backend
+       npm run deploy:local
+   [ ] Wait for: "SupplyChain deployed to: 0x..."
+
+4. RESTART Frontend
+   [ ] Open terminal 3:
+       cd client
+       npm run dev
+   [ ] Wait for: "Ready in X.Xs"
+
+5. RESET MetaMask
+   [ ] Open MetaMask
+   [ ] Settings → Advanced → Clear activity tab data
+   [ ] Click "Clear"
+
+6. REFRESH Browser
+   [ ] Go to http://localhost:3001
+   [ ] Press Ctrl+Shift+R (hard refresh)
+   [ ] Check diagnostic box - follow any remaining steps
+
+================================================================================
+IMPORT THE OWNER ACCOUNT (For Full Access)
+================================================================================
+To register roles and create orders, use the contract owner account:
+
+[ ] Open MetaMask
+[ ] Click account icon → Import account
+[ ] Select "Private Key"
+[ ] Paste: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+[ ] Click Import
+[ ] Account address should be: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+
+⚠️  WARNING: This is a TEST account. Never use on mainnet!
+
+================================================================================
+NEED MORE HELP?
+================================================================================
+1. Read QUICK_FIX.md for detailed explanations
+2. Read METAMASK_SETUP_GUIDE.md for full setup instructions
+3. Check backend terminal - should show RPC requests
+4. Check browser console (F12) - should not show errors
+5. Use the Connection Diagnostic box - it tells you exactly what's wrong!
+
+================================================================================
